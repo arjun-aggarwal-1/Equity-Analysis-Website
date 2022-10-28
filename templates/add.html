@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add
+{% endblock %}
+
+{% block main %}
+    <div>
+        <img src="/static/logo.png" style="width:250px;height:auto;" class="center">
+        <div style="font-size: xx-large"><span class="red">E</span><span class="blue">-</span><span class="black">T</span><span class="green">₹</span><span class="black">ade</span>
+    </div>
+    <form action="/add" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="NYSE Stock Symbol" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Shares" type="number">
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+    {% if checker %}
+        <div style="margin-top: 20px">
+            <h2>Successfully added {{shares}} shares of {{symbol}}</h2>
+        </div>
+    {% endif %}
+{% endblock %}

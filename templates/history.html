@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    {% if checker %}
+        <table style='margin-top: 20px' class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">Time (UTC)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in data %}
+                <tr>
+                    <td>{{d["type"]}}</td>
+                    <td>{{d["symbol"]}}</td>
+                    <td>{{d["price"]}}</td>
+                    <td>{{d["shares"]}}</td>
+                    <td>{{d["time"]}}</td>
+                </tr>
+                {% endfor %}
+            </body>
+        </table>
+    {% else %}
+        <div class="section">
+            <h2>No History</h2>
+        </div>
+    {% endif %}
+{% endblock %}

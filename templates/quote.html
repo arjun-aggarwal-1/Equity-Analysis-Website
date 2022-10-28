@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+  <div>
+    <img src="/static/logo.png" style="width:250px;height:auto;" class="center">
+    <div style="font-size: xx-large"><span class="red">E</span><span class="blue">-</span><span class="black">T</span><span class="green">₹</span><span class="black">ade</span>
+  </div>
+    <form action="/quote" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="NYSE Stock Symbol" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit" id = "submit">Submit</button>
+    </form>
+    {% if temp %}
+      {% if checker %}
+        <table style='margin-top: 20px' class="table">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Symbol</th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{symbol}}</td>
+              <td>{{name}}</td>
+              <td>{{price}}</td>
+            </tr>
+          </body>
+        </table>
+        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="PY" data-bs-toggle="tab" data-bs-target={{tab[symbol][0]}} type="button" role="tab" aria-controls={{tab[symbol][0][1:]}} aria-selected="true">Previous Year</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="PM" data-bs-toggle="tab" data-bs-target={{tab[symbol][1]}} type="button" role="tab" aria-controls={{tab[symbol][1][1:]}} aria-selected="false">Previous Month</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="PD" data-bs-toggle="tab" data-bs-target={{tab[symbol][2]}} type="button" role="tab" aria-controls={{tab[symbol][2][1:]}} aria-selected="false">Intra-Day</button>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id={{tab[symbol][0][1:]}} role="tabpanel" aria-labelledby="PY">
+            <div class="center">
+            <img src="data:image/png;base64,{{graphs[symbol][0]}}" class="img-fluid">
+            </div>
+          </div>
+          <div class="tab-pane fade" id={{tab[symbol][1][1:]}} role="tabpanel" aria-labelledby="PM">
+            <div class="center">
+            <img src="data:image/png;base64,{{graphs[symbol][1]}}" class="img-fluid">
+            </div>
+          </div>
+          <div class="tab-pane fade" id={{tab[symbol][2][1:]}} role="tabpanel" aria-labelledby="PD">
+            <div class="center">
+            <img src="data:image/png;base64,{{graphs[symbol][2]}}" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div style='margin-top: 20px' class="alert alert-danger" role="alert">
+          <h5>Invalid Symbol. Try again</h5>
+        </div>
+      {% endif %}
+    {% endif %}
+{% endblock %}
