@@ -1,5 +1,8 @@
 # Equity T₹ade (E-T₹ade)
 
+### Edit 
+Publishable tokens have expired and thus cannot be used to fetch data
+
 ## Features
 - Register: Any person can register to make a new account.
 - Log In: Registered users can access the main website by logging in.
